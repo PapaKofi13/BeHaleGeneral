@@ -1,0 +1,12 @@
+.active{
+    color: var(--color-ms) !important;
+}
+.active::before{
+    border-left: 2px solid var(--color-ms) !important;
+}
+img{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}

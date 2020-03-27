@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'assets/css/toast.css';
+
+@font-face {
+  font-family: 'sr';
+  src: url('assets/fonts/Sen-Regular.ttf');
+}
+
+
+@font-face {
+  font-family: 'sb';
+  src: url('assets/fonts/Sen-ExtraBold.ttf');
+}
+
+@font-face {
+  font-family: 'sm';
+  src: url('assets/fonts/Sen-Bold.ttf');
+}
+
+* {
+  font-family: sr;
+}
+
+@media (min-width: 768px) {
+  .navbar-vertical.navbar-expand-md .navbar-brand-img {
+    max-height: 9.5rem;
+  }
+}
+
+:root {
+  --color-mp: #381460;
+  --color-ms: #fe346e;
+}
+
+.default-main {
+  margin-top: 10.2%;
+}
