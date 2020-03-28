@@ -1,0 +1,159 @@
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+  <app-sidenav></app-sidenav>
+</nav>
+<div class="main-content">
+  <app-navbar></app-navbar>
+  <div class="container-fluid">
+    <div class="announcement-main">
+      <div class="anntop d-flex justify-content-end">
+        <button type="button" class="btn btn-md" data-toggle="modal" data-target="#announceId">
+          <i class="fas fa-bullhorn"></i> Add announcement
+        </button>
+      </div>
+      <div class="annbot">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="ann-card">
+              <div class="d-flex justify-content-between">
+                <span class="badge badge-pill badge-warning">Warning</span>
+                <span class="badge-date">23rd June 2020</span>
+              </div>
+              <h5 class="m-0">Closure of all public & private schools</h5>
+              <p class="m-0">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quod, similique nostrum deserunt quas
+                doloremque
+              </p>
+              <div class="d-flex justify-content-end mt-2">
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ann-card">
+              <div class="d-flex justify-content-between">
+                <span class="badge badge-pill badge-success">General</span>
+                <span class="badge-date">23rd June 2020</span>
+              </div>
+              <h5 class="m-0">Closure of all public & private schools</h5>
+              <p class="m-0">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quod, similique nostrum deserunt quas
+                doloremque
+              </p>
+              <div class="d-flex justify-content-end mt-2">
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ann-card">
+              <div class="d-flex justify-content-between">
+                <span class="badge badge-pill badge-success">General</span>
+                <span class="badge-date">23rd June 2020</span>
+              </div>
+              <h5 class="m-0">Closure of all public & private schools</h5>
+              <p class="m-0">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quod, similique nostrum deserunt quas
+                doloremque
+              </p>
+              <div class="d-flex justify-content-end mt-2">
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ann-card">
+              <div class="d-flex justify-content-between">
+                <span class="badge badge-pill badge-warning">Warning</span>
+                <span class="badge-date">23rd June 2020</span>
+              </div>
+              <h5 class="m-0">Closure of all public & private schools</h5>
+              <p class="m-0">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quod, similique nostrum deserunt quas
+                doloremque
+              </p>
+              <div class="d-flex justify-content-end mt-2">
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="ann-card">
+              <div class="d-flex justify-content-between">
+                <span class="badge badge-pill badge-danger">Important</span>
+                <span class="badge-date">23rd June 2020</span>
+              </div>
+              <h5 class="m-0">Closure of all public & private schools</h5>
+              <p class="m-0">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quod, similique nostrum deserunt quas
+                doloremque
+              </p>
+              <div class="d-flex justify-content-end mt-2">
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+                <button type="button" class="btn btn-light">
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade announce-modal" id="announceId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Announcements</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" name="title" id="title" placeholder="Title">
+            </div>
+            <div class="form-group">
+              <select class="form-control" name="annotype" id="annotype">
+                <option value="general">General</option>
+                <option value="important">Important</option>
+                <option value="warning">Warning</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="desc" id="desc" placeholder="Body" rows="5"></textarea>
+              <small id="desc" class="form-text text-muted text-right">1000</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

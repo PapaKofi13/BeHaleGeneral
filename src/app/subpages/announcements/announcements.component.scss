@@ -1,0 +1,100 @@
+.announcement-main {
+    width: 100%;
+    background-color: #fff;
+    min-height: 100vh;
+    height: auto;
+    padding: 3%;
+
+    .anntop {
+        button {
+            background: var(--color-ms);
+            color: #fff;
+            font-family: sm;
+        }
+
+    }
+
+    .annbot {
+        margin-top: 3%;
+
+        .ann-card {
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+            padding: 5%;
+            margin-bottom: 5%;
+
+            .badge-date {
+                font-size: .9rem;
+                color: rgba(0, 0, 0, .5);
+            }
+
+            h5 {
+                font-size: 1.3rem;
+                font-family: sm;
+                line-height: 24px;
+                margin: 4% 0 2% !important;
+            }
+
+            p {
+                -webkit-line-clamp: 2;
+                overflow-y: hidden;
+                line-height: 20px;
+                font-size: .9rem;
+                color: rgba(0, 0, 0, .5);
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+            }
+
+            button {
+                padding: .25rem .5rem;
+            }
+
+            .badge-warning {
+                color: #ffc107;
+                background-color: rgba(255, 193, 7, .25);
+            }
+        }
+    }
+
+}
+
+.announce-modal {
+    .modal-header {
+        padding: 1.25rem 1.25rem 0;
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-family: sm;
+        }
+        span{
+            font-size: 2rem;
+        }
+    }
+
+    .modal-footer {
+        padding: 0 1.5rem 6%;
+        .btn{
+            font-family: sm;
+            border: 0;
+        }
+        .btn-primary {
+            background-color: var(--color-ms);
+        }
+    }
+
+    .modal-body {
+        padding: 1.5rem 1.5rem 0;
+
+        .form-group {
+            margin-bottom: .7rem;
+
+            input,
+            select,
+            textarea {
+                border: 1px solid #f7f7f7;
+                resize: none;
+                color: #000;
+            }
+        }
+    }
+}

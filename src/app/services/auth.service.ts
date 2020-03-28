@@ -51,7 +51,7 @@ export class AuthService {
   public authEmailCheck(email, adm) {
     firebase
       .firestore()
-      .collection('behaleteam')
+      .collection('behaleadmin')
       .where('email', '==', `${email}`)
       .get()
       .then(res => {
@@ -67,11 +67,11 @@ export class AuthService {
           console.log('logged');
           this.rt.navigate(['dashboard']).then(() => {
             this.afs
-              .collection('behaleteam')
+              .collection('behaleadmin')
               .doc(`${adm}`)
               .valueChanges()
               .subscribe(data => {
-                this.toastS.mainSuccess(`Welcome Team`);
+                this.toastS.mainSuccess(`Welcome Admin`);
               });
             this.uiService.hideLoader();
           });

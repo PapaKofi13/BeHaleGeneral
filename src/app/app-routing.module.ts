@@ -1,7 +1,8 @@
-import { HealthCentersComponent } from './subpages/health-centers/health-centers.component';
-import { FeedsComponent } from './subpages/feeds/feeds.component';
-import { SettingsComponent } from './subpages/settings/settings.component';
-import { VideosComponent } from './subpages/videos/videos.component';
+import { ReportsComponent } from './subpages/reports/reports.component';
+import { LivefeedComponent } from './subpages/livefeed/livefeed.component';
+import { UsersettingsComponent } from './subpages/usersettings/usersettings.component';
+import { TracerComponent } from './subpages/tracer/tracer.component';
+import { AnnouncementsComponent } from './subpages/announcements/announcements.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './authmain/login/login.component';
@@ -13,10 +14,11 @@ const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
-  { path: "videos", component: VideosComponent, canActivate: [AuthGuard] },
-  { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: "feeds", component: FeedsComponent, canActivate: [AuthGuard] },
-  { path: "health-centers", component: HealthCentersComponent, canActivate: [AuthGuard] },
+  { path: "announcements", component: AnnouncementsComponent, canActivate: [AuthGuard] },
+  { path: "tracer", component: TracerComponent, canActivate: [AuthGuard] },
+  { path: "settings", component: UsersettingsComponent, canActivate: [AuthGuard] },
+  { path: "livefeed", component: LivefeedComponent, canActivate: [AuthGuard] },
+  { path: "reports", component: ReportsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

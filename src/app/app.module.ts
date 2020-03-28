@@ -22,10 +22,11 @@ import { NavbarComponent } from './misc/navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './authmain/login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { SettingsComponent } from './subpages/settings/settings.component';
-import { VideosComponent } from './subpages/videos/videos.component';
-import { HealthCentersComponent } from './subpages/health-centers/health-centers.component';
-import { FeedsComponent } from './subpages/feeds/feeds.component';
+import { ReportsComponent } from './subpages/reports/reports.component';
+import { TracerComponent } from './subpages/tracer/tracer.component';
+import { LivefeedComponent } from './subpages/livefeed/livefeed.component';
+import { UsersettingsComponent } from './subpages/usersettings/usersettings.component';
+import { AnnouncementsComponent } from './subpages/announcements/announcements.component';
 
 @NgModule({
   declarations: [
@@ -35,10 +36,11 @@ import { FeedsComponent } from './subpages/feeds/feeds.component';
     LoaderComponent,
     DashboardComponent,
     LoginComponent,
-    SettingsComponent,
-    VideosComponent,
-    HealthCentersComponent,
-    FeedsComponent,
+    ReportsComponent,
+    TracerComponent,
+    LivefeedComponent,
+    UsersettingsComponent,
+    AnnouncementsComponent,
   ],
   imports: [
     BrowserModule,
