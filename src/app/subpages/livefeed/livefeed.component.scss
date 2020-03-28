@@ -1,0 +1,18 @@
+.lf-main {
+    .lf-bot {
+        .nav-link.active {
+            background-color: var(--color-ms);
+            color: #fff;
+        }
+
+        .nav-link {
+            color: var(--color-ms);
+        }
+
+        input {
+            border: 1px solid #f7f7f7;
+            resize: none;
+            color: #000;
+        }
+    }
+}

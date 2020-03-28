@@ -27,6 +27,8 @@ import { TracerComponent } from './subpages/tracer/tracer.component';
 import { LivefeedComponent } from './subpages/livefeed/livefeed.component';
 import { UsersettingsComponent } from './subpages/usersettings/usersettings.component';
 import { AnnouncementsComponent } from './subpages/announcements/announcements.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { AnnouncementsComponent } from './subpages/announcements/announcements.c
     AngularFirestoreModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
+    Ng2SearchPipeModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,

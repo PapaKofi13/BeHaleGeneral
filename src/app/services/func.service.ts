@@ -2,13 +2,14 @@ import { UiService } from './ui.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
     providedIn: 'root'
 })
 export class FuncService {
-
+    public apiUrl = 'https://coronavirus-19-api.herokuapp.com/';
     public createdAt = firebase.firestore.Timestamp.now().seconds;
-    constructor(private firestore: AngularFirestore, private uiService: UiService) { }
+    constructor(private firestore: AngularFirestore, private uiService: UiService, private http: HttpClient) { }
 
     public addNewFeed(data, type) {
         this.uiService.showLoader();
@@ -38,4 +39,12 @@ export class FuncService {
             this.uiService.showError(err.message);
         })
     }
+
+    public getVAll() {
+        return this.http.get(`${this.apiUrl}all`, );
+      }
+    
+      public getVAllByCountries() {
+        return this.http.get(`${this.apiUrl}countries`);
+      }
 }

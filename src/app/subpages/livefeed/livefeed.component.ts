@@ -1,3 +1,4 @@
+import { FuncService } from './../../services/func.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./livefeed.component.scss']
 })
 export class LivefeedComponent implements OnInit {
+  public vData;
+  public vAllData;
+  public searchCountry: any;
+  constructor(private funcService: FuncService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getVirusData();
+    this.getAllVirusData();
   }
 
+  public getVirusData() {
+    this.funcService.getVAll().subscribe((data) => {
+      this.vData = data;
+    });
+  }
+
+  public getAllVirusData() {
+    this.funcService.getVAllByCountries().subscribe((data) => {
+      this.vAllData = data;
+      console.log(data);
+    });
+  }
 }
