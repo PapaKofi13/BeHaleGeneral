@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tracer.component.scss']
 })
 export class TracerComponent implements OnInit {
-
+  public userTraceName;
   constructor() { }
 
   ngOnInit(): void {
