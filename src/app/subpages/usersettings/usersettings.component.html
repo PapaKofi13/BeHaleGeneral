@@ -1,1 +1,153 @@
-<p>usersettings works!</p>
+<nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <app-sidenav></app-sidenav>
+</nav>
+<div class="main-content">
+    <app-navbar></app-navbar>
+    <div class="container-fluid">
+        <div class="settings-main default-container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="settings-inner">
+                        <div class="settings-header">
+                            <h5 class="m-0 text-capitalize">Organization Profile</h5>
+                        </div>
+                        <div class="settings-body">
+                            <div class="set-img text-center">
+                                <img src="../../../assets/img/behale-placeholder.png" alt="">
+                                <div class="mt-2">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#changeImgId">
+                                        Change Profile Image
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="set-form">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id=""
+                                            placeholder="Organisation Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="" id="" placeholder="Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id=""
+                                            placeholder="Street Address">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" readonly name="" id=""
+                                            placeholder="Country">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id="" placeholder="Website">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id=""
+                                            placeholder="Facebook Profile Link">
+                                        <small class="form-text text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id=""
+                                            placeholder="Instagram Profile Handle">
+                                        <small class="form-text text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id=""
+                                            placeholder="Twitter Profile Handle">
+                                        <small class="form-text text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id=""
+                                            placeholder="LinkedIn Profile Link">
+                                        <small class="form-text text-muted">Help text</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea placeholder="Type about of organisation" class="form-control" name=""
+                                            id="" rows="4"></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-save">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="settings-inner mb-6">
+                        <div class="settings-header">
+                            <h5 class="m-0 text-capitalize">Toll Free Lines</h5>
+                        </div>
+                        <div class="settings-body">
+                            <div class="set-form">
+                                <form>
+                                    <div class="alert alert-dark" role="alert">
+                                        <strong>Phone numbers should be raw inputted without hypens (-), brackets() &
+                                            plus sign(+). Eg. 0800444666</strong>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id=""
+                                            placeholder="Phone Number 1">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="" id=""
+                                            placeholder="Phone Number 2">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="" id=""
+                                            placeholder="Phone Number 3">
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea placeholder="Brief info to the public..." class="form-control" name=""
+                                            id="" rows="4"></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-save">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-inner mt-4">
+                        <div class="settings-header">
+                            <h5 class="m-0 text-capitalize">Change Password</h5>
+                        </div>
+                        <div class="settings-body">
+                            <div class="alert mb-4 alert-dark" role="alert">
+                                <strong>Requesting a password reset, logouts the dashboard then sends your a password reset
+                                    mail on the registered account email. Please check your inbox for the mail.</strong>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-save">
+                                    Request Password Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="changeImgId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Profile Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="../../../assets/img/behale-placeholder.png" alt="">
+                <div class="form-group">
+                    <input type="file" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Upload Image</button>
+            </div>
+        </div>
+    </div>
+</div>
