@@ -5,6 +5,7 @@
     <app-navbar></app-navbar>
     <div class="container-fluid">
         <div class="settings-main default-container">
+            <app-loader></app-loader>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="settings-inner">
@@ -13,7 +14,8 @@
                         </div>
                         <div class="settings-body">
                             <div class="set-img text-center">
-                                <img src="../../../assets/img/behale-placeholder.png" alt="">
+                                <img src="../../../assets/img/behale-placeholder.png" alt="" *ngIf="adminData?.photourl === ''" >
+                                <img [src]="adminData?.photourl" alt="" *ngIf="adminData?.photourl !== ''">
                                 <div class="mt-2">
                                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                         data-target="#changeImgId">
@@ -24,41 +26,43 @@
                             <div class="set-form">
                                 <form>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id=""
-                                            placeholder="Organisation Name">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.name" name="name"
+                                            id="name" placeholder="Organisation Name">
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" name="" id="" placeholder="Email">
+                                        <input type="email" class="form-control" readonly [(ngModel)]="adminData.email"
+                                            name="email" id="email" placeholder="Email">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id=""
-                                            placeholder="Street Address">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.address"
+                                            name="address" id="address" placeholder="Street Address">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" readonly name="" id=""
-                                            placeholder="Country">
+                                        <input type="text" class="form-control" readonly [(ngModel)]="adminData.country"
+                                            name="country" id="country" placeholder="Country">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id="" placeholder="Website">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.website"
+                                            name="website" id="website" placeholder="Website">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id=""
-                                            placeholder="Facebook Profile Link">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.fb" name="fb"
+                                            id="fb" placeholder="Facebook Profile Link">
                                         <small class="form-text text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id=""
-                                            placeholder="Instagram Profile Handle">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.ig" name="ig"
+                                            id="ig" placeholder="Instagram Profile Handle">
                                         <small class="form-text text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id=""
-                                            placeholder="Twitter Profile Handle">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.tw" name="tw"
+                                            id="tw" placeholder="Twitter Profile Handle">
                                         <small class="form-text text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id=""
-                                            placeholder="LinkedIn Profile Link">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.lin" name="lin"
+                                            id="lin" placeholder="LinkedIn Profile Link">
                                         <small class="form-text text-muted">Help text</small>
                                     </div>
                                     <div class="form-group">
@@ -66,7 +70,7 @@
                                             id="" rows="4"></textarea>
                                     </div>
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-save">Save</button>
+                                        <button type="button" class="btn btn-save" (click)="updateProfile()">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -86,23 +90,23 @@
                                             plus sign(+). Eg. 0800444666</strong>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id=""
-                                            placeholder="Phone Number 1">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.tollone"
+                                            name="tollone" id="tollone" placeholder="Phone Number 1">
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" name="" id=""
-                                            placeholder="Phone Number 2">
+                                        <input type="email" class="form-control" [(ngModel)]="adminData.tolltwo"
+                                            name="tolltwo" id="tolltwo" placeholder="Phone Number 2">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="" id=""
-                                            placeholder="Phone Number 3">
+                                        <input type="text" class="form-control" [(ngModel)]="adminData.tollthree"
+                                            name="tollthree" id="tollthree" placeholder="Phone Number 3">
                                     </div>
                                     <div class="form-group">
-                                        <textarea placeholder="Brief info to the public..." class="form-control" name=""
-                                            id="" rows="4"></textarea>
+                                        <textarea placeholder="Brief info to the public..." class="form-control"
+                                            [(ngModel)]="adminData.pubb" name="pubb" id="pubb" rows="4"></textarea>
                                     </div>
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-save">Save</button>
+                                        <button type="button" class="btn btn-save" (click)="updateToll()">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -114,11 +118,12 @@
                         </div>
                         <div class="settings-body">
                             <div class="alert mb-4 alert-dark" role="alert">
-                                <strong>Requesting a password reset, logouts the dashboard then sends your a password reset
+                                <strong>Requesting a password reset, logouts the dashboard then sends your a password
+                                    reset
                                     mail on the registered account email. Please check your inbox for the mail.</strong>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-save">
+                                <button type="button" class="btn btn-save" data-toggle="modal" data-target="#resetPassword">
                                     Request Password Reset
                                 </button>
                             </div>
@@ -139,14 +144,33 @@
                 </button>
             </div>
             <div class="modal-body text-center">
-                <img src="../../../assets/img/behale-placeholder.png" alt="">
+                <img src="{{imageSrc}}" alt="">
                 <div class="form-group">
-                    <input type="file" class="form-control">
+                    <input type="file" class="form-control" #userPhoto (change)="onFileSelected($event)" name="image">
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Upload Image</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="profileUpload()" >Upload Image</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="resetPassword" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reset Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center mb-4">
+                <h6 class="m-0 text-center">Are you sure you want to reset your password?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="sendReset()"  data-dismiss="modal">Reset Password</button>
             </div>
         </div>
     </div>

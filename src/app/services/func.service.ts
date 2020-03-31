@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { HttpClient } from '@angular/common/http';
+import { AngularFireStorage } from '@angular/fire/storage';
 @Injectable({
     providedIn: 'root'
 })
@@ -10,7 +11,8 @@ export class FuncService {
     public apiUrl = 'https://coronavirus-19-api.herokuapp.com/';
     public dateAPI = "http://worldtimeapi.org/api/ip";
     public createdAt = firebase.firestore.Timestamp.now().seconds;
-    constructor(private firestore: AngularFirestore, private uiService: UiService, private http: HttpClient) { }
+    constructor(private firestore: AngularFirestore, private uiService: UiService, private http: HttpClient,
+        private storage: AngularFireStorage) { }
 
     public getVAll() {
         return this.http.get(`${this.apiUrl}all`);
@@ -92,7 +94,45 @@ export class FuncService {
         })
     }
 
-    public getAdminProfile() {
-        
+    public getAdminProfile(key) {
+        return this.firestore.collection('behaleadmin').doc(key).valueChanges();
+    }
+
+    public editAdminProfile(key, data) {
+        this.uiService.showLoader();
+        return this.firestore.collection('behaleadmin').doc(key).update(data).then((res) => {
+            this.uiService.hideLoader();
+            this.uiService.showSuccess('Profile Updated');
+        }).catch(err => {
+            this.uiService.hideLoader();
+            this.uiService.showError(err.message);
+        })
+    }
+
+    public editToll(key, data) {
+        this.uiService.showLoader();
+        return this.firestore.collection('behaleadmin').doc(key).update(data).then((res) => {
+            this.uiService.hideLoader();
+            this.uiService.showSuccess('Toll Information Updated');
+        }).catch(err => {
+            this.uiService.hideLoader();
+            this.uiService.showError(err.message);
+        })
+    }
+
+    public updateImage(key, file) {
+        this.uiService.showLoader();
+        return this.storage.ref(`behaleadminprofile/${key}`).put(file).then((data) => {
+            data.ref.getDownloadURL().then((res) => {
+                this.firestore.collection('behaleadmin').doc(key).update({
+                    photourl: res
+                });
+                this.uiService.hideLoader();
+                this.uiService.showSuccess('Profile Image Updated');
+            });
+        }).catch(err => {
+            this.uiService.hideLoader();
+            this.uiService.showError(err.message);
+        })
     }
 }

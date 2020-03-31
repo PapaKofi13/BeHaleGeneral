@@ -38,6 +38,13 @@ export class AuthService {
       window.location.reload();
     });
   }
+
+  public resetPassword(email) {
+    return this.afauth.auth.sendPasswordResetEmail(email).then(() => {
+      this.logout();
+    })
+  }
+
   get authState(): any {
     return this.afauth.authState;
   }
