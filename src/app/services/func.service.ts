@@ -8,43 +8,91 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FuncService {
     public apiUrl = 'https://coronavirus-19-api.herokuapp.com/';
+    public dateAPI = "http://worldtimeapi.org/api/ip";
     public createdAt = firebase.firestore.Timestamp.now().seconds;
     constructor(private firestore: AngularFirestore, private uiService: UiService, private http: HttpClient) { }
 
-    public addNewFeed(data, type) {
+    public getVAll() {
+        return this.http.get(`${this.apiUrl}all`);
+    }
+    public getDate() {
+        return this.http.get(`${this.dateAPI}`);
+    }
+
+    public getVAllByCountries() {
+        return this.http.get(`${this.apiUrl}countries`);
+    }
+
+    public getCatlimitFeeds() {
+        return this.firestore.collection('mainfeeds', ref => ref.limit(30).orderBy('createdAt', 'desc')).get();
+    }
+
+
+    public getMoreCatFeeds(lastFeed) {
+        return this.firestore.collection('mainfeeds', ref => ref.limit(30).orderBy('createdAt', 'desc').startAfter(lastFeed)).get();
+    }
+
+    public getCountryAment(key) {
+        return this.firestore.collection('announcement', ref => ref.where('ownerKey', '==', `${key}`).limit(50).orderBy('createdAt', 'desc')).valueChanges();
+    }
+
+    public addAnnounce(key, title, type, body) {
         this.uiService.showLoader();
-        let newData = data;
-        newData['createdAt'] = this.createdAt;
-        newData['type'] = type;
+        const annoData = {
+            ownerKey: key,
+            title: title,
+            type: type,
+            body: body,
+            createdAt: this.createdAt
+        }
 
-        return this.firestore.collection('mainfeeds').add(newData).then((res) => {
-            this.firestore.collection('mainfeeds').doc(res.id).update({
-                feedKey: res.id
-            });
-            this.uiService.showSuccess('Feed Added Successfully');
-            this.uiService.hideLoader();
+        return this.firestore.collection('behaleadmin').doc(`${key}`).get().toPromise().then((data) => {
+            const gotData = data.data()['country'];
+            annoData['country'] = gotData;
+            this.firestore.collection('announcement').add(annoData).then((res) => {
+                this.firestore.collection('announcement').doc(res.id).update({
+                    annoKey: res.id
+                });
+                this.uiService.hideLoader();
+                this.uiService.showSuccess('Announcement Broadcasted');
+            }).catch(err => {
+                this.uiService.hideLoader();
+                this.uiService.showError(err.message);
+            })
         }).catch(err => {
             this.uiService.hideLoader();
-            this.uiService.showError(err.message);
-        });
-    }
-
-    public getNewsFeed(type) {
-        return this.firestore.collection('mainfeeds', ref => ref.where('type', '==', type).orderBy('createdAt', 'desc')).valueChanges();
-    }
-    public deleteNewsFeed(key) {
-        return this.firestore.collection('mainfeeds').doc(key).delete().then(() => {
-            this.uiService.showSuccess('Feed Deleted Successfully');
-        }).catch(err => {
             this.uiService.showError(err.message);
         })
     }
 
-    public getVAll() {
-        return this.http.get(`${this.apiUrl}all`, );
-      }
-    
-      public getVAllByCountries() {
-        return this.http.get(`${this.apiUrl}countries`);
-      }
+    public deleteAnnounce(key) {
+        this.uiService.showLoader();
+        return this.firestore.collection('announcement').doc(key).delete().then(() => {
+            this.uiService.hideLoader();
+            this.uiService.showSuccess('Announcement Deleted');
+        }).catch(err => {
+            this.uiService.hideLoader();
+            this.uiService.showError(err.message);
+        })
+    }
+
+    public editAnnounce(key, title, type, body) {
+        this.uiService.showLoader();
+        const annoData = {
+            title: title,
+            type: type,
+            body: body,
+        }
+        return this.firestore.collection('announcement').doc(key).update(annoData).then(() => {
+            this.uiService.hideLoader();
+            this.uiService.showSuccess('Announcement Edited');
+        }).catch(err => {
+            this.uiService.hideLoader();
+            this.uiService.showError(err.message);
+        })
+    }
+
+    public getAdminProfile() {
+        
+    }
 }

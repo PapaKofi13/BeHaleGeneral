@@ -23,14 +23,10 @@ export class AuthService {
     return this.afauth.auth
       .signInWithEmailAndPassword(loginData.email, loginData.password)
       .then(res => {
-        console.log('logged');
-        
         const adminuid = res.user.uid;
         this.authEmailCheck(loginData.email, adminuid);
       })
       .catch(err => {
-        console.log('not not');
-        
         this.uiService.hideLoader();
         this.toastS.mainError(err.message);
       });
@@ -38,6 +34,7 @@ export class AuthService {
   public logout() {
     return this.afauth.auth.signOut().then(() => {
       this.rt.navigate(['login']);
+      localStorage.removeItem('bhAdminHash');
       window.location.reload();
     });
   }
@@ -55,7 +52,6 @@ export class AuthService {
       .where('email', '==', `${email}`)
       .get()
       .then(res => {
-        console.log('not not');
         if (res.empty === true) {
           return this.afauth.auth.signOut().then(() => {
             setTimeout(() => {
@@ -64,13 +60,13 @@ export class AuthService {
             }, 1000);
           });
         } else {
-          console.log('logged');
           this.rt.navigate(['dashboard']).then(() => {
             this.afs
               .collection('behaleadmin')
               .doc(`${adm}`)
-              .valueChanges()
+              .get()
               .subscribe(data => {
+                localStorage.setItem('bhAdminHash', data.data()['adminKey']);
                 this.toastS.mainSuccess(`Welcome Admin`);
               });
             this.uiService.hideLoader();

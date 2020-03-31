@@ -1,9 +1,29 @@
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
-  <app-sidenav></app-sidenav>
+    <app-sidenav></app-sidenav>
 </nav>
 <div class="main-content">
-  <app-navbar></app-navbar>
-  <div class="container-fluid mt--7">
-    
-  </div>
+    <app-navbar></app-navbar>
+    <div class="container-fluid mt--7">
+        <div class="dashboard-main default-container">
+            <h5 class="m-0">Trending News</h5>
+            <div class="row">
+                <div class="col-lg-3" *ngFor="let data of allData">
+                    <div class="dash-card">
+                        <img [src]="data?.urlToImage" alt="">
+                        <div>
+                            <span class="badge badge-dark text-capitalize">{{data?.type}}</span>
+                            <h6 class="m-0">
+                                {{data?.title}}
+                            </h6>
+                            <small>{{data?.createdAt * 1000 | date:'medium'}}</small>
+                            <div class="text-right">
+                                <a target="_blank" class="btn btn-primary btn-sm" href="{{data?.url}}"
+                                    role="button">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
