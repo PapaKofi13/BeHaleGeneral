@@ -5,9 +5,10 @@
     <app-navbar></app-navbar>
     <div class="container-fluid">
         <div class="report-main default-container">
+            <app-loader></app-loader>
             <div class="report-top mb-3">
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-light">
+                    <button type="button" class="btn btn-light" (click)="getReports()" >
                         <i class="fas fa-redo-alt"></i>
                     </button>
                 </div>
@@ -25,15 +26,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1 <span class="badge badge-success text-capitalize">checked</span></td>
-                            <td class="text-capitalize">michael quaynor</td>
-                            <td class="text-capitalize">tsokome street</td>
-                            <td class="text-center">0547383892</td>
-                            <td class="text-right">23/03/21</td>
+                        <tr *ngFor="let report of reportsData; let id = index">
+                            <td>{{id+1}}. <span class="badge text-capitalize" [ngClass]="{'badge-success': report?.status === 'checked', 'badge-warning': report?.status === 'pending'}" >{{report?.status}}</span></td>
+                            <td class="text-capitalize">{{report?.name}}</td>
+                            <td class="text-capitalize">{{report?.address}}</td>
+                            <td class="text-center">{{report?.phone}}</td>
+                            <td class="text-right">{{report?.createdAt * 1000 | date:'medium'}}</td>
                             <td class="text-center report-action">
                                 <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#reportInfo">
+                                    data-target="#reportInfo" (click)="activateReport(report, id)">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <div class="dropdown open">
@@ -42,146 +43,8 @@
                                         <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="report1">
-                                        <button class="dropdown-item" href="#">Checked</button>
-                                        <button class="dropdown-item" href="#">Pending</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1 <span class="badge badge-success text-capitalize">checked</span></td>
-                            <td class="text-capitalize">michael quaynor</td>
-                            <td class="text-capitalize">tsokome street</td>
-                            <td class="text-center">0547383892</td>
-                            <td class="text-right">23/03/21</td>
-                            <td class="text-center report-action">
-                                <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#reportInfo">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <div class="dropdown open">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="report1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="report1">
-                                        <button class="dropdown-item" href="#">Checked</button>
-                                        <button class="dropdown-item" href="#">Pending</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1 <span class="badge badge-success text-capitalize">checked</span></td>
-                            <td class="text-capitalize">michael quaynor</td>
-                            <td class="text-capitalize">tsokome street</td>
-                            <td class="text-center">0547383892</td>
-                            <td class="text-right">23/03/21</td>
-                            <td class="text-center report-action">
-                                <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#reportInfo">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <div class="dropdown open">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="report1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="report1">
-                                        <button class="dropdown-item" href="#">Checked</button>
-                                        <button class="dropdown-item" href="#">Pending</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1 <span class="badge badge-success text-capitalize">checked</span></td>
-                            <td class="text-capitalize">michael quaynor</td>
-                            <td class="text-capitalize">tsokome street</td>
-                            <td class="text-center">0547383892</td>
-                            <td class="text-right">23/03/21</td>
-                            <td class="text-center report-action">
-                                <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#reportInfo">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <div class="dropdown open">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="report1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="report1">
-                                        <button class="dropdown-item" href="#">Checked</button>
-                                        <button class="dropdown-item" href="#">Pending</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1 <span class="badge badge-success text-capitalize">checked</span></td>
-                            <td class="text-capitalize">michael quaynor</td>
-                            <td class="text-capitalize">tsokome street</td>
-                            <td class="text-center">0547383892</td>
-                            <td class="text-right">23/03/21</td>
-                            <td class="text-center report-action">
-                                <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#reportInfo">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <div class="dropdown open">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="report1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="report1">
-                                        <button class="dropdown-item" href="#">Checked</button>
-                                        <button class="dropdown-item" href="#">Pending</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1 <span class="badge badge-success text-capitalize">checked</span></td>
-                            <td class="text-capitalize">michael quaynor</td>
-                            <td class="text-capitalize">tsokome street</td>
-                            <td class="text-center">0547383892</td>
-                            <td class="text-right">23/03/21</td>
-                            <td class="text-center report-action">
-                                <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#reportInfo">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <div class="dropdown open">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="report1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="report1">
-                                        <button class="dropdown-item" href="#">Checked</button>
-                                        <button class="dropdown-item" href="#">Pending</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1 <span class="badge badge-success text-capitalize">checked</span></td>
-                            <td class="text-capitalize">michael quaynor</td>
-                            <td class="text-capitalize">tsokome street</td>
-                            <td class="text-center">0547383892</td>
-                            <td class="text-right">23/03/21</td>
-                            <td class="text-center report-action">
-                                <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#reportInfo">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <div class="dropdown open">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="report1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="report1">
-                                        <button class="dropdown-item" href="#">Checked</button>
-                                        <button class="dropdown-item" href="#">Pending</button>
+                                        <button class="dropdown-item" (click)="changeStatus(report?.rKey,'checked', id)">Checked</button>
+                                        <button class="dropdown-item" (click)="changeStatus(report?.rKey,'pending', id)">Pending</button>
                                     </div>
                                 </div>
                             </td>
@@ -206,59 +69,62 @@
                         <div class="col-lg-6">
                             <div class="rep-in">
                                 <span class="text-uppercase rep-header">name</span>
-                                <h6 class="text-capitalize m-0">michael quaynor</h6>
-                                <span class="badge badge-dark text-capitalize">0546522014</span>
+                                <h6 class="text-capitalize m-0">{{selectReport?.name}}</h6>
+                                <span class="badge badge-dark text-capitalize">{{selectReport?.phone}}</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="rep-in">
                                 <span class="text-uppercase rep-header">Location</span>
-                                <h6 class="text-capitalize m-0">tsokome street</h6>
-                                <h6 class="text-capitalize m-0">Ghana</h6>
+                                <h6 class="text-capitalize m-0">{{selectReport?.address}}</h6>
+                                <h6 class="text-capitalize m-0">{{adminCountry}}</h6>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <span class="badge badge-warning text-capitalize">pending</span>
+                        <span class="badge text-capitalize" [ngClass]="{'badge-success': selectReport?.status === 'checked', 'badge-warning': selectReport?.status === 'pending'}" >{{selectReport?.status}}</span>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="rep-in">
                                 <p class="rep-ques m-0">Over the past seven days, have you had any symptoms that may be
                                     caused by coronavirus?</p>
-                                <h6 class="text-capitalize">yes</h6>
+                                <h6 class="text-capitalize">{{selectReport?.qone}}</h6>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="rep-in">
                                 <p class="rep-ques m-0">What symptoms have you had?</p>
-                                <h6 class="text-capitalize">yes</h6>
+                                <h6 class="text-capitalize">
+                                    <span *ngFor="let sym of selectReport?.qtwo" class="badge badge-dark mr-1 mb-1 text-capitalize">{{sym}}</span>
+                                </h6>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="rep-in">
                                 <p class="rep-ques m-0">Which day did you get symptoms?</p>
-                                <h6 class="text-capitalize">yes</h6>
+                                <h6 class="text-capitalize">{{selectReport?.qthree}}</h6>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="rep-in">
                                 <p class="rep-ques m-0">Do you have chronic illness from the past?</p>
-                                <h6 class="text-capitalize">yes</h6>
+                                <h6 class="text-capitalize">{{selectReport?.qfour}}</h6>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="rep-in">
                                 <p class="rep-ques m-0">Have you been tested positive for Corona Virus during this
                                     period of illness?</p>
-                                <h6 class="text-capitalize">yes</h6>
+                                <h6 class="text-capitalize">{{selectReport?.qfive}}</h6>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Checked</button>
+                    <button type="button" class="btn btn-success" (click)="changeStatus(selectReport?.rKey,'checked', activeId)"  *ngIf="selectReport?.status === 'pending'">Checked</button>
+                    <button type="button" class="btn btn-warning" (click)="changeStatus(selectReport?.rKey,'pending', activeId)"  *ngIf="selectReport?.status === 'checked'">Pending</button>
                 </div>
             </div>
         </div>

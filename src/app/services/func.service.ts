@@ -34,6 +34,10 @@ export class FuncService {
         return this.firestore.collection('mainfeeds', ref => ref.limit(30).orderBy('createdAt', 'desc').startAfter(lastFeed)).get();
     }
 
+    public getMoreCountryAment(key, lastAnno) {
+        return this.firestore.collection('announcement', ref => ref.where('ownerKey', '==', `${key}`).limit(50).orderBy('createdAt', 'desc').startAfter(lastAnno)).get();
+    }
+
     public getCountryAment(key) {
         return this.firestore.collection('announcement', ref => ref.where('ownerKey', '==', `${key}`).limit(50).orderBy('createdAt', 'desc')).valueChanges();
     }
@@ -134,5 +138,38 @@ export class FuncService {
             this.uiService.hideLoader();
             this.uiService.showError(err.message);
         })
+    }
+
+    public getReports() {
+        let adminCountry = localStorage.getItem('bhAdminCountry');
+        return this.firestore.collection('reports', ref => ref.where('country', '==', `${adminCountry}`).orderBy('createdAt', 'desc').limit(30)).get();
+    }
+
+    public getMoreReports(lastReport) {
+        let adminCountry = localStorage.getItem('bhAdminCountry');
+        return this.firestore.collection('reports', ref => ref.where('country', '==', `${adminCountry}`).orderBy('createdAt', 'desc').limit(30).startAfter(lastReport)).get();
+    }
+
+    public changeReportStatus(key, status) {
+        this.uiService.showLoader();
+        return this.firestore.collection('reports').doc(`${key}`).update({
+            status: status
+        }).then(() => {
+            this.uiService.hideLoader();
+            this.uiService.showSuccess('Report Updated');
+        }).catch(err => {
+            this.uiService.hideLoader();
+            this.uiService.showWarning(err.message);
+        })
+    }
+
+    public getUserTrace(key) {
+        return this.firestore.collection('behaleusers').doc(`${key}`).get();
+    }
+
+    public searchUser(email) {
+        this.uiService.showLoader();
+        let adminCountry = localStorage.getItem('bhAdminCountry');
+        return this.firestore.collection('behaleusers', ref => ref.where('email', '==', `${email}`).where('country', '==', `${adminCountry}`)).get();
     }
 }

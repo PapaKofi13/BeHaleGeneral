@@ -5,14 +5,15 @@
     <app-navbar></app-navbar>
     <div class="container-fluid">
         <div class="tracer-main default-container">
+            <app-loader></app-loader>
             <div class="trace-top">
                 <div class="d-flex justify-content-end">
                     <div class="lf-search">
                         <div class="input-group">
-                            <input type="text" class="form-control" [(ngModel)]="userTraceName" name="search"
+                            <input type="text" class="form-control" [(ngModel)]="userTraceEmail" name="search"
                                 id="search" placeholder="Search by email">
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" (click)="searchUser()">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -27,115 +28,60 @@
                             <h5 class="m-0">Search Results</h5>
                         </div>
                         <div class="trace-body">
-                            <div class="d-flex trace-card justify-content-between">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img src="../../../assets/img/c2.jpg" alt="">
+                            <div *ngIf="emptyData === 'data'">
+                                <div class="d-flex trace-card justify-content-between"
+                                    *ngFor="let search of searchData">
+                                    <div class="d-flex justify-content-start">
+                                        <div>
+                                            <img [src]="search?.photourl" *ngIf="search?.photourl !== ''" alt="">
+                                            <img src="../../../assets/img/profileuser.png"
+                                                *ngIf="search?.photourl === ''" alt="">
+
+                                        </div>
+                                        <div class="ml-2">
+                                            <h6 class="m-0 text-capitalize">{{search?.fname}} {{search?.lname}}</h6>
+                                            <p class="m-0">{{search?.email}}</p>
+                                            <span class="badge badge-default text-capitalize">{{search?.gender}}</span>
+                                        </div>
                                     </div>
-                                    <div class="ml-2">
-                                        <h6 class="m-0 text-capitalize">michael quaynor</h6>
-                                        <p class="m-0 text-capitalize">male</p>
+                                    <div class="trace-btn">
+                                        <button type="button"
+                                            (click)="getUserLogs(search?.fname, search?.lname, search?.traces)"
+                                            class="btn btn-primary">View Logs</button>
                                     </div>
-                                </div>
-                                <div class="trace-btn">
-                                    <button type="button" class="btn btn-primary">View Logs</button>
                                 </div>
                             </div>
-                            <div class="d-flex trace-card justify-content-between">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img src="../../../assets/img/c1.png" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <h6 class="m-0 text-capitalize">michael quaynor</h6>
-                                        <p class="m-0 text-capitalize">male</p>
-                                    </div>
-                                </div>
-                                <div class="trace-btn">
-                                    <button type="button" class="btn btn-primary">View Logs</button>
-                                </div>
+                            <div *ngIf="emptyData === 'search'" class="trace-empty">
+                                <h6>Search results list</h6>
                             </div>
-                            <div class="d-flex trace-card justify-content-between">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img src="../../../assets/img/c2.jpg" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <h6 class="m-0 text-capitalize">michael quaynor</h6>
-                                        <p class="m-0 text-capitalize">male</p>
-                                    </div>
-                                </div>
-                                <div class="trace-btn">
-                                    <button type="button" class="btn btn-primary">View Logs</button>
-                                </div>
-                            </div>
-                            <div class="d-flex trace-card justify-content-between">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img src="../../../assets/img/c1.png" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <h6 class="m-0 text-capitalize">michael quaynor</h6>
-                                        <p class="m-0 text-capitalize">male</p>
-                                    </div>
-                                </div>
-                                <div class="trace-btn">
-                                    <button type="button" class="btn btn-primary">View Logs</button>
-                                </div>
+                            <div *ngIf="emptyData === 'no-data'" class="trace-empty">
+                                <h6>User Data Not Found</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="trace-header">
-                            <h5 class="m-0">Trace Log for: <span class="badge badge-light text-capitalize">michael
-                                    quaynor</span></h5>
+                            <h5 class="m-0">Trace Log for: <span
+                                    class="badge badge-default text-capitalize">{{selectUser}}</span></h5>
                         </div>
                         <div class="trace-body pl-2">
-                            <div class="d-flex trace-card justify-content-between">
+                            <div class="d-flex trace-card justify-content-between" *ngFor="let log of logData">
                                 <div class="d-flex justify-content-start">
                                     <div>
-                                        <img src="../../../assets/img/c2.jpg" alt="">
+                                        <img [src]="log?.photourl" *ngIf="log?.photourl !== ''" alt="">
+                                        <img src="../../../assets/img/profileuser.png" *ngIf="log?.photourl === ''"
+                                            alt="">
                                     </div>
                                     <div class="ml-2">
-                                        <h6 class="m-0 text-capitalize">michael quaynor</h6>
-                                        <p class="m-0">michael@gmail.com</p>
-                                        <span class="badge badge-dark">0536493382</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex trace-card justify-content-between">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img src="../../../assets/img/c1.png" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <h6 class="m-0 text-capitalize">michael quaynor</h6>
-                                        <p class="m-0">michael@gmail.com</p>
-                                        <span class="badge badge-dark">0536493382</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex trace-card justify-content-between">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img src="../../../assets/img/c2.jpg" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <h6 class="m-0 text-capitalize">michael quaynor</h6>
-                                        <p class="m-0">michael@gmail.com</p>
-                                        <span class="badge badge-dark">0536493382</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex trace-card justify-content-between">
-                                <div class="d-flex justify-content-start">
-                                    <div>
-                                        <img src="../../../assets/img/c1.png" alt="">
-                                    </div>
-                                    <div class="ml-2">
-                                        <h6 class="m-0 text-capitalize">michael quaynor</h6>
-                                        <p class="m-0">michael@gmail.com</p>
-                                        <span class="badge badge-dark">0536493382</span>
+                                        <h6 class="m-0 trace-name text-capitalize">{{log?.fname}} {{log?.lname}}</h6>
+                                        <p class="m-0">{{log?.email}}</p>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="badge badge-secondary text-capitalize mr-2">{{log?.gender}}</span>
+                                            <div>
+                                                <span
+                                                    class="badge badge-default text-capitalize">{{log?.date * 1000 | date: 'medium'}}</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

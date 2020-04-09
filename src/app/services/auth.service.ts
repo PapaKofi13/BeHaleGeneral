@@ -74,6 +74,7 @@ export class AuthService {
               .get()
               .subscribe(data => {
                 localStorage.setItem('bhAdminHash', data.data()['adminKey']);
+                localStorage.setItem('bhAdminCountry', data.data()['country']);
                 this.toastS.mainSuccess(`Welcome Admin`);
               });
             this.uiService.hideLoader();
