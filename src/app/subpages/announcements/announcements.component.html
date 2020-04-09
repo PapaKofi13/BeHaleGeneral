@@ -7,12 +7,16 @@
     <div class="announcement-main default-container">
       <app-loader></app-loader>
       <div class="anntop d-flex justify-content-end">
+        <button type="button" class="btn btn-light" (click)="getAnnouncements()">
+          <i class="fas fa-redo-alt"></i>
+        </button>
         <button type="button" class="btn btn-md" data-toggle="modal" (click)="changeModal('add')"
           data-target="#announceId">
           <i class="fas fa-bullhorn"></i> Add announcement
         </button>
       </div>
-      <div class="annbot">
+      <div class="annbot" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+        (scrolled)="getMoreCountryAment()">
         <div class="row">
           <div class="col-lg-4" *ngFor="let data of announceData">
             <div class="ann-card">
@@ -26,7 +30,8 @@
                 {{data?.body}}
               </p>
               <div class="d-flex justify-content-end mt-2">
-                <button type="button" class="btn btn-light" data-toggle="modal" (click)="changeModal('delete', data)" data-target="#announceId">
+                <button type="button" class="btn btn-light" data-toggle="modal" (click)="changeModal('delete', data)"
+                  data-target="#announceId">
                   <i class="fas fa-trash-alt"></i>
                 </button>
                 <button type="button" class="btn btn-light" data-toggle="modal" (click)="changeModal('edit', data)"

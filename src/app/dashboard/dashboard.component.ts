@@ -34,8 +34,5 @@ export class DashboardComponent implements OnInit {
       const arrlast = data.docs[data.docs.length - 1];
       this.lastData = arrlast;
     });
-    setTimeout(() => {
-      e.target.complete();
-    }, 2000);
   }
 }

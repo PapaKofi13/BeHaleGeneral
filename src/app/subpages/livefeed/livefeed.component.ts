@@ -26,7 +26,6 @@ export class LivefeedComponent implements OnInit {
   public getAllVirusData() {
     this.funcService.getVAllByCountries().subscribe((data) => {
       this.vAllData = data;
-      console.log(data);
     });
   }
 }

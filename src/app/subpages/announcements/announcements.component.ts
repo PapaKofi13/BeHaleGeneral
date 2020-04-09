@@ -31,16 +31,18 @@ export class AnnouncementsComponent implements OnInit {
   }
 
   public getAnnouncements() {
+    this.announceData = [];
     this.funcService.getCountryAment(this.adminKey).subscribe(data => {
-      this.announceData = data;
-      console.log(data);
-      const arrlast = data[data.length - 1];
+      data.docs.map(mdata => {
+        this.announceData.push(mdata.data());
+      });
+      const arrlast = data.docs[data.docs.length - 1];
       this.lastData = arrlast;
     })
   }
 
   public getMoreCountryAment() {
-    this.funcService.getMoreCountryAment(this.adminKey,this.lastData).subscribe(data => {
+    this.funcService.getMoreCountryAment(this.adminKey, this.lastData).subscribe(data => {
       data.docs.map(mdata => {
         this.announceData.push(mdata.data());
       });

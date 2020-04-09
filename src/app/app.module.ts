@@ -8,6 +8,7 @@ import { environment } from './../environments/environment.prod';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,6 +47,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   ],
   imports: [
     BrowserModule,
+    InfiniteScrollModule,
     AppRoutingModule,
     AngularFireAuthModule,
     AngularFirestoreModule,

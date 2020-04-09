@@ -8,49 +8,56 @@
             <app-loader></app-loader>
             <div class="report-top mb-3">
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-light" (click)="getReports()" >
+                    <button type="button" class="btn btn-light" (click)="getReports()">
                         <i class="fas fa-redo-alt"></i>
                     </button>
                 </div>
             </div>
-            <div class="report-bot">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th># /status</th>
-                            <th class="text-center">Name</th>
-                            <th class="text-center">Location</th>
-                            <th class="text-center">Phone Number</th>
-                            <th class="text-center">Date</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let report of reportsData; let id = index">
-                            <td>{{id+1}}. <span class="badge text-capitalize" [ngClass]="{'badge-success': report?.status === 'checked', 'badge-warning': report?.status === 'pending'}" >{{report?.status}}</span></td>
-                            <td class="text-capitalize">{{report?.name}}</td>
-                            <td class="text-capitalize">{{report?.address}}</td>
-                            <td class="text-center">{{report?.phone}}</td>
-                            <td class="text-right">{{report?.createdAt * 1000 | date:'medium'}}</td>
-                            <td class="text-center report-action">
-                                <button type="button" class="btn btn-dark" data-toggle="modal"
-                                    data-target="#reportInfo" (click)="activateReport(report, id)">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <div class="dropdown open">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="report1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+            <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+            (scrolled)="getMoreReports()">
+                <div class="report-bot">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th># /status</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Location</th>
+                                <th class="text-center">Phone Number</th>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let report of reportsData; let id = index">
+                                <td>{{id+1}}. <span class="badge text-capitalize"
+                                        [ngClass]="{'badge-success': report?.status === 'checked', 'badge-warning': report?.status === 'pending'}">{{report?.status}}</span>
+                                </td>
+                                <td class="text-capitalize">{{report?.name}}</td>
+                                <td class="text-capitalize">{{report?.address}}</td>
+                                <td class="text-center">{{report?.phone}}</td>
+                                <td class="text-right">{{report?.createdAt * 1000 | date:'medium'}}</td>
+                                <td class="text-center report-action">
+                                    <button type="button" class="btn btn-dark" data-toggle="modal"
+                                        data-target="#reportInfo" (click)="activateReport(report, id)">
+                                        <i class="fas fa-eye"></i>
                                     </button>
-                                    <div class="dropdown-menu" aria-labelledby="report1">
-                                        <button class="dropdown-item" (click)="changeStatus(report?.rKey,'checked', id)">Checked</button>
-                                        <button class="dropdown-item" (click)="changeStatus(report?.rKey,'pending', id)">Pending</button>
+                                    <div class="dropdown open">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="report1"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="report1">
+                                            <button class="dropdown-item"
+                                                (click)="changeStatus(report?.rKey,'checked', id)">Checked</button>
+                                            <button class="dropdown-item"
+                                                (click)="changeStatus(report?.rKey,'pending', id)">Pending</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -82,7 +89,8 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <span class="badge text-capitalize" [ngClass]="{'badge-success': selectReport?.status === 'checked', 'badge-warning': selectReport?.status === 'pending'}" >{{selectReport?.status}}</span>
+                        <span class="badge text-capitalize"
+                            [ngClass]="{'badge-success': selectReport?.status === 'checked', 'badge-warning': selectReport?.status === 'pending'}">{{selectReport?.status}}</span>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -96,7 +104,8 @@
                             <div class="rep-in">
                                 <p class="rep-ques m-0">What symptoms have you had?</p>
                                 <h6 class="text-capitalize">
-                                    <span *ngFor="let sym of selectReport?.qtwo" class="badge badge-dark mr-1 mb-1 text-capitalize">{{sym}}</span>
+                                    <span *ngFor="let sym of selectReport?.qtwo"
+                                        class="badge badge-dark mr-1 mb-1 text-capitalize">{{sym}}</span>
                                 </h6>
                             </div>
                         </div>
@@ -123,8 +132,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" (click)="changeStatus(selectReport?.rKey,'checked', activeId)"  *ngIf="selectReport?.status === 'pending'">Checked</button>
-                    <button type="button" class="btn btn-warning" (click)="changeStatus(selectReport?.rKey,'pending', activeId)"  *ngIf="selectReport?.status === 'checked'">Pending</button>
+                    <button type="button" class="btn btn-success"
+                        (click)="changeStatus(selectReport?.rKey,'checked', activeId)"
+                        *ngIf="selectReport?.status === 'pending'">Checked</button>
+                    <button type="button" class="btn btn-warning"
+                        (click)="changeStatus(selectReport?.rKey,'pending', activeId)"
+                        *ngIf="selectReport?.status === 'checked'">Pending</button>
                 </div>
             </div>
         </div>

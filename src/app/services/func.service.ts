@@ -26,12 +26,11 @@ export class FuncService {
     }
 
     public getCatlimitFeeds() {
-        return this.firestore.collection('mainfeeds', ref => ref.limit(30).orderBy('createdAt', 'desc')).get();
+        return this.firestore.collection('mainfeeds', ref => ref.limit(10).orderBy('createdAt', 'desc')).get();
     }
 
-
     public getMoreCatFeeds(lastFeed) {
-        return this.firestore.collection('mainfeeds', ref => ref.limit(30).orderBy('createdAt', 'desc').startAfter(lastFeed)).get();
+        return this.firestore.collection('mainfeeds', ref => ref.limit(10).orderBy('createdAt', 'desc').startAfter(lastFeed)).get();
     }
 
     public getMoreCountryAment(key, lastAnno) {
@@ -39,7 +38,7 @@ export class FuncService {
     }
 
     public getCountryAment(key) {
-        return this.firestore.collection('announcement', ref => ref.where('ownerKey', '==', `${key}`).limit(50).orderBy('createdAt', 'desc')).valueChanges();
+        return this.firestore.collection('announcement', ref => ref.where('ownerKey', '==', `${key}`).limit(50).orderBy('createdAt', 'desc')).get();
     }
 
     public addAnnounce(key, title, type, body) {
