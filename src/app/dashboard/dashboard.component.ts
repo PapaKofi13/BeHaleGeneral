@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  public getMoreFeeds(e) {
+  public getMoreFeeds() {
     this.funcService.getMoreCatFeeds(this.lastData).subscribe(data => {
       data.docs.map(mdata => {
         this.allData.push(mdata.data());
