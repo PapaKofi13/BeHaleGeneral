@@ -11,7 +11,7 @@
       <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <div class="media align-items-center">
           <span class="avatar avatar-sm rounded-circle">
-            <img alt="Image placeholder" src="../../../assets/img/logo.png">
+            <img alt="Image placeholder" class="logo-main" src="../../../assets/img/logo.png">
           </span>
         </div>
       </a>
@@ -31,7 +31,7 @@
       <div class="row">
         <div class="col-6 collapse-brand">
           <a [routerLink]="['/dashboard']">
-            <img src="../../../assets/img/logo.png">
+            <img class="logo-main" src="../../../assets/img/logo.png">
           </a>
         </div>
         <div class="col-6 collapse-close">
@@ -78,6 +78,11 @@
         <a class="nav-link" routerLinkActive="active" (click)="logoutDashboard()">
           <i class="fas fa-sign-out-alt"></i> Logout
         </a>
+      </li>
+      <li class="nav-item">
+        <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/BehaleApp"><img
+            src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy us a coffee"><span
+            style="margin-left:15px;font-size:19px !important;">Buy us a coffee</span></a>
       </li>
     </ul>
   </div>

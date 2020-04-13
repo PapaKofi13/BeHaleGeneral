@@ -35,6 +35,8 @@ export class AuthService {
     return this.afauth.auth.signOut().then(() => {
       this.rt.navigate(['login']);
       localStorage.removeItem('bhAdminHash');
+      localStorage.removeItem('bhAdminType');
+      localStorage.removeItem('bhAdminCountry');
       window.location.reload();
     });
   }
@@ -74,6 +76,7 @@ export class AuthService {
               .get()
               .subscribe(data => {
                 localStorage.setItem('bhAdminHash', data.data()['adminKey']);
+                localStorage.setItem('bhAdminType', data.data()['adminType']);
                 localStorage.setItem('bhAdminCountry', data.data()['country']);
                 this.toastS.mainSuccess(`Welcome Admin`);
               });

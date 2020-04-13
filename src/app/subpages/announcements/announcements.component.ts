@@ -1,3 +1,4 @@
+import { UiService } from './../../services/ui.service';
 import { FuncService } from './../../services/func.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +17,7 @@ export class AnnouncementsComponent implements OnInit {
   public editType;
   public modalType = 'add';
   public annoForm: FormGroup;
-  constructor(private funcService: FuncService) { }
+  constructor(private funcService: FuncService, private uiService: UiService) { }
 
   ngOnInit(): void {
     this.adminKey = localStorage.getItem('bhAdminHash');
@@ -52,15 +53,30 @@ export class AnnouncementsComponent implements OnInit {
   }
 
   public addAnnouncement() {
-    this.funcService.addAnnounce(this.adminKey, this.annoForm.value.title, this.annoForm.value.type, this.annoForm.value.body);
+    const adminType = localStorage.getItem('bhAdminType');
+    if (adminType === 'admin') {
+      this.funcService.addAnnounce(this.adminKey, this.annoForm.value.title, this.annoForm.value.type, this.annoForm.value.body);
+    } else {
+      this.uiService.showError(`You're not an Admin!`)
+    }
   }
 
   public delAnnounce() {
-    this.funcService.deleteAnnounce(this.editData.annoKey);
+    const adminType = localStorage.getItem('bhAdminType');
+    if (adminType === 'admin') {
+      this.funcService.deleteAnnounce(this.editData.annoKey);
+    } else {
+      this.uiService.showError(`You're not an Admin!`)
+    }
   }
 
   public editAnnounce() {
-    this.funcService.editAnnounce(this.editData.annoKey, this.editTitle, this.editType, this.editBody);
+    const adminType = localStorage.getItem('bhAdminType');
+    if (adminType === 'admin') {
+      this.funcService.editAnnounce(this.editData.annoKey, this.editTitle, this.editType, this.editBody);
+    } else {
+      this.uiService.showError(`You're not an Admin!`)
+    }
   }
 
   public changeModal(type, data?) {

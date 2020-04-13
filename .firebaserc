@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "behaleapp"
+  },
+  "targets": {
+    "behaleapp": {
+      "hosting": {
+        "behaleapp": [
+          "behaleapp"
+        ]
+      }
+    }
+  }
+}

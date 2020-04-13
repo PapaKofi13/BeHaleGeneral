@@ -1,3 +1,4 @@
+import { UiService } from './../../services/ui.service';
 import { AuthService } from './../../services/auth.service';
 import { FuncService } from './../../services/func.service';
 import { Component, OnInit } from '@angular/core';
@@ -28,7 +29,7 @@ export class UsersettingsComponent implements OnInit {
     website: '',
   }
   imgFile: any;
-  constructor(private funcService: FuncService, private authService: AuthService) { }
+  constructor(private funcService: FuncService, private authService: AuthService, private uiService: UiService) { }
 
   ngOnInit(): void {
     this.adminKey = localStorage.getItem('bhAdminHash');
@@ -60,7 +61,12 @@ export class UsersettingsComponent implements OnInit {
   }
 
   public updateToll() {
-    this.funcService.editToll(this.adminKey, this.adminData)
+    const adminType = localStorage.getItem('bhAdminType');
+    if (adminType === 'admin') {
+      this.funcService.editToll(this.adminKey, this.adminData)
+    } else {
+      this.uiService.showError(`You're not an Admin!`)
+    }
   }
 
   public updateProfile() {
@@ -84,6 +90,11 @@ export class UsersettingsComponent implements OnInit {
   }
 
   public profileUpload() {
-    this.funcService.updateImage(this.adminKey, this.imgFile);
+    const adminType = localStorage.getItem('bhAdminType');
+    if (adminType === 'admin') {
+      this.funcService.updateImage(this.adminKey, this.imgFile);
+    } else {
+      this.uiService.showError(`You're not an Admin!`)
+    }
   }
 }
